@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Canvas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with title and user info -->
+        <header class="header">
+            <h1>🎨 Collaborative Drawing Canvas</h1>
+            <div class="user-info">
+                <span class="status" id="connection-status">Connecting...</span>
+                <span class="user-count" id="user-count">Users: 0</span>
+            </div>
+        </header>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="tool-group">
+                <label>Tool:</label>
+                <button class="tool-btn active" data-tool="brush" title="Brush (B)">
+                    <svg width="20" height="20" viewBox="0 0 20 20">
+                        <path d="M15 2L18 5L7 16L4 17L5 14L15 2Z" fill="currentColor"/>
+                    </svg>
+                </button>
+                <button class="tool-btn" data-tool="eraser" title="Eraser (E)">
+                    <svg width="20" height="20" viewBox="0 0 20 20">
+                        <path d="M16 2L18 4L9 13L7 11L16 2ZM8 12L4 16H10L14 12L8 12Z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="tool-group">
+                <label>Color:</label>
+                <input type="color" id="color-picker" value="#000000">
+                <div class="color-presets">
+                    <button class="color-preset" data-color="#000000" style="background: #000000"></button>
+                    <button class="color-preset" data-color="#FF0000" style="background: #FF0000"></button>
+                    <button class="color-preset" data-color="#00FF00" style="background: #00FF00"></button>
+                    <button class="color-preset" data-color="#0000FF" style="background: #0000FF"></button>
+                    <button class="color-preset" data-color="#FFFF00" style="background: #FFFF00"></button>
+                </div>
+            </div>
+
+            <div class="tool-group">
+                <label>Size:</label>
+                <input type="range" id="stroke-width" min="1" max="50" value="3">
+                <span id="stroke-width-value">3</span>
+            </div>
+
+            <div class="tool-group">
+                <button class="action-btn" id="undo-btn" title="Undo (Ctrl+Z)">
+                    <svg width="20" height="20" viewBox="0 0 20 20">
+                        <path d="M8 3L3 8L8 13V9C12 9 15 10 17 13C16 9 14 5 8 4V3Z" fill="currentColor"/>
+                    </svg>
+                    Undo
+                </button>
+                <button class="action-btn" id="redo-btn" title="Redo (Ctrl+Y)">
+                    <svg width="20" height="20" viewBox="0 0 20 20">
+                        <path d="M12 3L17 8L12 13V9C8 9 5 10 3 13C4 9 6 5 12 4V3Z" fill="currentColor"/>
+                    </svg>
+                    Redo
+                </button>
+                <button class="action-btn" id="clear-btn" title="Clear Canvas">
+                    <svg width="20" height="20" viewBox="0 0 20 20">
+                        <path d="M4 4L16 16M16 4L4 16" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Clear
+                </button>
+            </div>
+
+            <div class="tool-group">
+                <button class="action-btn" id="save-btn" title="Save as Image">
+                    <svg width="20" height="20" viewBox="0 0 20 20">
+                        <path d="M10 2V13M10 13L7 10M10 13L13 10M4 15V17H16V15" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    Save
+                </button>
+            </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-container">
+            <canvas id="drawing-canvas"></canvas>
+            <div class="cursors" id="cursors-container"></div>
+            <div class="performance-stats" id="stats">
+                <div>FPS: <span id="fps">0</span></div>
+                <div>Latency: <span id="latency">0</span>ms</div>
+            </div>
+        </div>
+
+        <!-- Online Users Panel -->
+        <div class="users-panel">
+            <h3>Online Users</h3>
+            <div id="users-list" class="users-list"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="canvas.js"></script>
+    <script src="websocket.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

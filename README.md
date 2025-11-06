@@ -151,6 +151,12 @@ vercel
 3. Set build command: `npm install`
 4. Set start command: `npm start`
 
+### Deployed Links
+```bash
+https://collaborative-canvas-s23v.onrender.com/ # Render
+
+```
+
 ## 🐛 Known Limitations
 
 1. **Canvas State Size**: Canvas states are stored in memory. With many users and long sessions, memory usage can increase. Consider implementing periodic cleanup or database storage for production.
